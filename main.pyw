@@ -45,9 +45,10 @@ def read_file():
     return times, moods, times_sd, moods_sd
 
 
-# Plot all time data, all time average and seven day average
+# Plot all time data, all time average, seven day average and current time
 def plot_at():
     times, moods, _, moods_sd = read_file()
+    current_time = int(_time.time())
 
     sd_avg = sum(moods_sd) / len(moods_sd)
     at_avg = sum(moods) / len(moods)
@@ -55,21 +56,24 @@ def plot_at():
     pyplot.plot(times, moods, 'bo-')
     pyplot.axhline(sd_avg, color='r')
     pyplot.axhline(at_avg, color='y')
+    pyplot.axvline(current_time, color='k')
 
-    pyplot.legend(['Mood', '7 Day Average', 'All Time Average'])
+    pyplot.legend(['Mood', '7 Day Average', 'All Time Average', 'Current Time'])
     pyplot.show()
 
 
-# Plot seven day data and seven day average
+# Plot seven day data, seven day average and current time
 def plot_sd():
     _, _, times_sd, moods_sd = read_file()
+    current_time = int(_time.time())
 
     sd_avg = sum(moods_sd) / len(moods_sd)
 
     pyplot.plot(times_sd, moods_sd, 'bo-')
     pyplot.axhline(sd_avg, color='r')
+    pyplot.axvline(current_time, color='k')
 
-    pyplot.legend(['Mood', '7 Day Average'])
+    pyplot.legend(['Mood', '7 Day Average', 'Current Time'])
     pyplot.show()
 
 
